@@ -9,6 +9,7 @@ class colorReduce:
         self.colorTdDict = self.__colorTDict()
         self.basicColors = self.colorTdDict.keys()
         self.reducedColors = self.__colorListTranslate()
+        self.newpdDF = self.__newDF()
     
     def __colorTDict(self): 
         return {
@@ -277,3 +278,6 @@ class colorReduce:
             reducedColors.append(self.__colorTranslate(color))
         return(reducedColors)
         
+    def __newDF(self):
+        newDF = self.pdDF['binnedColor'] = self.reducedColors
+        return(newDF)
