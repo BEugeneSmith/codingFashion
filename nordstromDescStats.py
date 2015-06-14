@@ -112,6 +112,32 @@ class dfExtract(Props):
             patternCounts.append(self.itemFreqTable.get(pattern))
         return(patternCounts)
 
+
+class ratioAnalysis:
+    
+    def __init__(self,mStats,wStats):
+        self.menStats = mStats
+        self.womenStats = wStats
+        self.ratioData = self.ratioPrep()
+    
+    def ratioPrep(self):
+        menSummNorm = [float(i)/sum(self.menStats.summary.values()) for i in self.menStats.summary.values()]
+        menuSummNorm = [float(i)/sum(self.menStats.uniqueSummary.values()) for i in self.menStats.uniqueSummary.values()]
+        womenSummNorm = [float(i)/sum(self.womenStats.summary.values()) for i in self.womenStats.summary.values()]
+        womenuSummNorm = [float(i)/sum(self.womenStats.uniqueSummary.values()) for i in self.womenStats.uniqueSummary.values()]
+
+        Summ = menSummNorm + womenSummNorm
+        uSumm = menuSummNorm + womenuSummNorm
+        desc=[
+            'men Fit', 'men Texture', 'men Patterns', 'men Items',
+            'women Fit', 'women Texture', 'women Patterns', 'women Items'
+            ]
+        ratio=[]
+    
+        for i in range(8):
+            ratio.append(uSumm[i]/Summ[i])
+    
+        return({'x':Summ,'y':uSumm,'desc':desc,'ratio':ratio})
     
 class descriptiveStats(Props):
     
