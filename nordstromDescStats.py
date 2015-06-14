@@ -266,6 +266,90 @@ class colorDataPrep:
             ratio[color] = perc
         return(ratio)
 
+class itemReduce(Props):
+    
+    def __init__(self,df):
+        Props.__init__(self)
+        self.df = df
+        self.df['item'] = self.__extractedPieces()
+        self.df['pattern'] = self.__extractedPatterns()
+        self.df['texture'] = self.__extractedTextures()
+        self.df['fit'] = self.__extractedFits()
+    
+    #apply these two methods to the other three parameters
+    def __translatePiece(self,item):
+        for piece in self.items:
+            testPiece = re.findall(piece,item)
+            if testPiece:
+                return testPiece
+            elif not testPiece and piece == self.items[-1]:
+                return ['unsorted']
+            else:
+                next
+            
+    def __extractedPieces(self):
+        array = []
+        for item in self.df['ItemName']:
+            array.append(self.__translatePiece(item))
+        return(sum(array,[]))
+  
+
+    def __translatePattern(self,item):
+        for pattern in self.patterns:
+            testPattern = re.findall(pattern,item)
+            if testPattern:
+                return testPattern
+            elif not testPattern and pattern == self.patterns[-1]:
+                return ['unsorted']
+            else:
+                next
+            
+    def __extractedPatterns(self):
+        array = []
+        for item in self.df['ItemName']:
+            array.append(self.__translatePattern(item))
+        combinedArray = sum(array,[])
+        del combinedArray[-1] 
+        return(combinedArray)
+    
+    
+    def __translateTexture(self,item):
+        for texture in self.textures:
+            testTexture = re.findall(texture,item)
+            if testTexture:
+                return testTexture
+            elif not testTexture and texture == self.textures[-1]:
+                return ['unsorted']
+            else:
+                next
+          
+    def __extractedTextures(self):
+        array = []
+        for item in self.df['ItemName']:
+            array.append(self.__translateTexture(item))
+        combinedArray = sum(array,[])
+        del combinedArray[-1] 
+        del combinedArray[-2]
+        del combinedArray[-3] 
+        return(combinedArray)
+    
+    def __translateFit(self,item):
+        for fit in self.fits:
+            testFit = re.findall(fit,item)
+            if testFit:
+                return testFit
+            elif not testFit and fit == self.fits[-1]:
+                return ['unsorted']
+            else:
+                next
+          
+    def __extractedFits(self):
+        array = []
+        for item in self.df['ItemName']:
+            array.append(self.__translateFit(item))
+        combinedArray = sum(array,[])
+        return(combinedArray)
+    
 class colorReduce:
     #returns pandas dataframe with reduced colors
     
