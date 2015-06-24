@@ -317,6 +317,8 @@ class itemReduce(Props):
         array = []
         for item in self.df['ItemName']:
             array.append(self.__translatePiece(item))
+        combinedArray = sum(array,[])
+        combinedArray = self.__dfCheck('ItemName',combinedArray)
         return(sum(array,[]))
   
 
@@ -335,7 +337,7 @@ class itemReduce(Props):
         for item in self.df['ItemName']:
             array.append(self.__translatePattern(item))
         combinedArray = sum(array,[])
-        del combinedArray[-1] 
+        combinedArray = self.__dfCheck('ItemName',combinedArray)
         return(combinedArray)
     
     
@@ -354,9 +356,7 @@ class itemReduce(Props):
         for item in self.df['ItemName']:
             array.append(self.__translateTexture(item))
         combinedArray = sum(array,[])
-        del combinedArray[-1] 
-        del combinedArray[-2]
-        del combinedArray[-3] 
+        combinedArray = self.__dfCheck('ItemName',combinedArray)
         return(combinedArray)
     
     def __translateFit(self,item):
@@ -374,7 +374,22 @@ class itemReduce(Props):
         for item in self.df['ItemName']:
             array.append(self.__translateFit(item))
         combinedArray = sum(array,[])
+        combinedArray= self.__dfCheck('ItemName',combinedArray)
         return(combinedArray)
+        
+    __dfCheck(self,dfItem,isoParam):
+        dsI = len(self.df[dfItem])
+        dsP = len(isoParam)
+        
+        if dsI > dsP:
+            dsDiff = dsI - dsP
+            for i in range(dsDiff)[::-1]:
+                del self.df[-i]
+        elif dsI < dsP:
+            dsDiff = dsP - dsI
+            for i in range(dsDiff)[::-1]:
+                del [-i]
+        return(isoParam)
     
 class colorReduce:
     #returns pandas dataframe with reduced colors
