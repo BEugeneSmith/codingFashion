@@ -316,9 +316,13 @@ class itemReduce(Props):
         for item in self.df['ItemName']:
             array.append(self.__translatePiece(item))
         combinedArray = sum(array,[])
+<<<<<<< HEAD
         combinedArray= self.__dfCheck('ItemName',combinedArray)
         for i in range(len(self.df['ItemName'])):
             pass
+=======
+        combinedArray = self.__dfCheck('ItemName',combinedArray)
+>>>>>>> e064f63d2000b71807ce40bb9dfc749cc624397d
         return(sum(array,[]))
   
 
@@ -337,7 +341,11 @@ class itemReduce(Props):
         for item in self.df['ItemName']: 
             array.append(self.__translatePattern(item))
         combinedArray = sum(array,[])
+<<<<<<< HEAD
         combinedArray= self.__dfCheck('ItemName',combinedArray)
+=======
+        combinedArray = self.__dfCheck('ItemName',combinedArray)
+>>>>>>> e064f63d2000b71807ce40bb9dfc749cc624397d
         return(combinedArray)
     
     
@@ -356,7 +364,11 @@ class itemReduce(Props):
         for item in self.df['ItemName']:
             array.append(self.__translateTexture(item))
         combinedArray = sum(array,[])
+<<<<<<< HEAD
         combinedArray= self.__dfCheck('ItemName',combinedArray)
+=======
+        combinedArray = self.__dfCheck('ItemName',combinedArray)
+>>>>>>> e064f63d2000b71807ce40bb9dfc749cc624397d
         return(combinedArray)
     
     def __translateFit(self,item):
@@ -376,8 +388,13 @@ class itemReduce(Props):
         combinedArray = sum(array,[])
         combinedArray= self.__dfCheck('ItemName',combinedArray)
         return(combinedArray)
+<<<<<<< HEAD
 
     def __dfCheck(self,dfItem,isoParam):
+=======
+        
+    __dfCheck(self,dfItem,isoParam):
+>>>>>>> e064f63d2000b71807ce40bb9dfc749cc624397d
         dsI = len(self.df[dfItem])
         dsP = len(isoParam)
         
@@ -388,7 +405,11 @@ class itemReduce(Props):
         elif dsI < dsP:
             dsDiff = dsP - dsI
             for i in range(dsDiff)[::-1]:
+<<<<<<< HEAD
                 del isoParam[-i]
+=======
+                del [-i]
+>>>>>>> e064f63d2000b71807ce40bb9dfc749cc624397d
         return(isoParam)
     
 class colorReduce:
