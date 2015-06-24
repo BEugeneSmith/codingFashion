@@ -275,7 +275,6 @@ class colorDataPrep:
         self.ratioTable = self.__percentageTable()
         
     def __colorFreqTable(self):
-    #creates a table of frequency for all of the item names
         colors = self.df['binnedColor'].tolist()
         
         freqTable = {}
@@ -302,7 +301,6 @@ class itemReduce(Props):
         self.df['texture'] = self.__extractedTextures()
         self.df['fit'] = self.__extractedFits()
     
-    #apply these two methods to the other three parameters
     def __translatePiece(self,item):
         for piece in self.items:
             testPiece = re.findall(piece,item)
@@ -317,6 +315,10 @@ class itemReduce(Props):
         array = []
         for item in self.df['ItemName']:
             array.append(self.__translatePiece(item))
+        combinedArray = sum(array,[])
+        combinedArray= self.__dfCheck('ItemName',combinedArray)
+        for i in range(len(self.df['ItemName'])):
+            pass
         return(sum(array,[]))
   
 
@@ -329,13 +331,13 @@ class itemReduce(Props):
                 return ['unsorted']
             else:
                 next
-            
+    
     def __extractedPatterns(self):
         array = []
-        for item in self.df['ItemName']:
+        for item in self.df['ItemName']: 
             array.append(self.__translatePattern(item))
         combinedArray = sum(array,[])
-        del combinedArray[-1] 
+        combinedArray= self.__dfCheck('ItemName',combinedArray)
         return(combinedArray)
     
     
@@ -354,9 +356,7 @@ class itemReduce(Props):
         for item in self.df['ItemName']:
             array.append(self.__translateTexture(item))
         combinedArray = sum(array,[])
-        del combinedArray[-1] 
-        del combinedArray[-2]
-        del combinedArray[-3] 
+        combinedArray= self.__dfCheck('ItemName',combinedArray)
         return(combinedArray)
     
     def __translateFit(self,item):
@@ -374,7 +374,22 @@ class itemReduce(Props):
         for item in self.df['ItemName']:
             array.append(self.__translateFit(item))
         combinedArray = sum(array,[])
+        combinedArray= self.__dfCheck('ItemName',combinedArray)
         return(combinedArray)
+
+    def __dfCheck(self,dfItem,isoParam):
+        dsI = len(self.df[dfItem])
+        dsP = len(isoParam)
+        
+        if dsI > dsP:
+            dsDiff = dsI - dsP
+            for i in range(dsDiff)[::-1]:
+                del self.df[-i]
+        elif dsI < dsP:
+            dsDiff = dsP - dsI
+            for i in range(dsDiff)[::-1]:
+                del isoParam[-i]
+        return(isoParam)
     
 class colorReduce:
     #returns pandas dataframe with reduced colors
