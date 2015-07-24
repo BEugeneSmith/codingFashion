@@ -87,8 +87,8 @@ class pcaPlot(pcaWrap):
     def plot(self):
         cols = self.pcDF.columns.tolist()
         plot = figure(tools=[],
-            x_axis_label = self.norm_pcDF[cols[0]].tolist(),
-            y_axis_label = self.norm_pcDF[cols[1]].tolist()
-        )
+            x_axis_label = cols[0],
+            y_axis_label = cols[1],
+            )
         plot.scatter(self.norm_pcDF[cols[0]].tolist(),self.norm_pcDF[cols[1]].tolist())
         show(plot)
