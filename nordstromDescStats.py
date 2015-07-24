@@ -677,9 +677,16 @@ class colorReduce:
 class ordinate(Props):
     def __init__(self,df,sex):
         self.terms = Props.__init__(self)
-        self.df = df
+        self.df = df.pdDF
         self.__dfOrd()
         self.df['sex'] = sex
+
+
+    def __cleanPrice(self):
+        # corrects the price values
+        self.df['Price'] = map(lambda x: re.sub(',','',x),self.df['Price'].tolist())
+        self.df['Price'] = map(lambda x: int(float(x)),self.df['Price'].tolist())
+        return(self.df)
 
     def __ordinate(self,val):
         # returns index of the value in the dataset
@@ -694,7 +701,7 @@ class ordinate(Props):
                 next
 
     def __dfOrd(self):
-        # make sa dataframe ordinal
+        # make a dataframe ordinal
         for i in self.df.columns.tolist():
             features = ['item','pattern','texture','fit','binnedColor'] # don't forget 'Price'
             if i not in features:
