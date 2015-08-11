@@ -84,7 +84,7 @@ class nordstromPlots():
             {'men':self.menPlot.itemZip.values(),'women':self.womenPlot.itemZip.values()},
             cat=self.menPlot.itemZip.keys(),
             legend=True,title="Item Counts",
-            width=400,height=400,
+            width=900,height=450,
             xlabel='Items',ylabel="Count",
             tools=None
             )
@@ -141,13 +141,13 @@ class pcaPlot(nml.pcaWrap):
 
     def plot(self,title):
         cols = self.pcDF.columns.tolist()
-        plot = figure(tools=[],
+        plot = figure(
             x_axis_label = cols[0],
             y_axis_label = cols[1],
             plot_width = 450,plot_height = 450,
+            title=title,
             )
         plot.scatter(
             self.norm_pcDF[cols[0]].tolist(),self.norm_pcDF[cols[1]].tolist(),
-            title=title
             )
         return(plot)
