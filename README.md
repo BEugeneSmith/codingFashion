@@ -1,4 +1,4 @@
 # Coding Fashion
-The purpose of this project to see whether the difference in Men's and Women's clothing can be described statistically. As it seems, they can! Feel free to poke around this repository to see my analysis [here](http://nbviewer.ipython.org/github/BEugeneSmith7/codingFashion/blob/master/NordstromNotebook.ipynb). being the primary summary. Though this project's primary goal is complete feel free to suggest changes that may help in the long run. 
+The purpose of this project to see whether the difference in Men's and Women's clothing can be described statistically. As it seems, they can! Feel free to poke around this repository to see my analysis [here](http://nbviewer.ipython.org/github/BEugeneSmith7/codingFashion/blob/master/NordstromNotebook.ipynb).  Though this project's primary goal is complete feel free to suggest changes that may help in the long run. 
 
 Thanks!
