@@ -675,11 +675,12 @@ class colorReduce:
         self.pdDF['binnedColor'] = self.reducedColors
 
 class ordinate(Props):
-    def __init__(self,df,sex):
+    # def __init__(self,df,sex): #just in case we need it later 
+    def __init__(self,df):
         self.terms = Props.__init__(self)
         self.df = df.pdDF
         self.__dfOrd()
-        self.df['sex'] = sex
+        # self.df['sex'] = sex # this may be useful later
 
 
     def __cleanPrice(self):

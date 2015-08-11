@@ -2,10 +2,9 @@ import nordstromDescStats as nds
 import pandas as pd
 from sklearn.decomposition import PCA
 import numpy as np
-import random
-#from bokeh.plotting import show,figure,output_notebook
+from math import sqrt
+from random import sample
 
-#output_notebook()
 
 class preProcess():
 
@@ -13,9 +12,9 @@ class preProcess():
         self.__df = pd.DataFrame.from_csv(csv)
         self.__extractItems = nds.itemReduce(self.__df)
         self.__redColors = nds.colorReduce(self.__extractItems.df)
-        self.ordDF = nds.ordinate(self.__redColors,'0') # for now we are not using this second argument
+        self.ordDF = nds.ordinate(self.__redColors)
         self.duplicate = self.ordDF.df
-        self.redDup = self.duplicate.drop(['ItemName','VendorName','Color','sex','Price'],axis=1)
+        self.redDup = self.duplicate.drop(['ItemName','VendorName','Color','Price'],axis=1)
 
 class datasetSplit():
     def __init__(self,df):
@@ -79,16 +78,34 @@ class pcaWrap(datasetSplit):
             normDF[i] = map(lambda x: (float(normDF.loc[x,i]))/mx,normDF.index.tolist())
         return(normDF)
 
-class pcaPlot(pcaWrap):
-
+class dispersal:
+    # returns a score that measures the dispersal/spread of a dataset
     def __init__(self,df):
-        pcaWrap.__init__(self,df)
+        self.df = df
+        self.dispersal = self.__averageSpread()
 
-    def plot(self):
-        cols = self.pcDF.columns.tolist()
-        plot = figure(tools=[],
-            x_axis_label = cols[0],
-            y_axis_label = cols[1],
-            )
-        plot.scatter(self.norm_pcDF[cols[0]].tolist(),self.norm_pcDF[cols[1]].tolist())
-        show(plot)
+    def __spread(self):
+        indexes = self.df.index.tolist()
+        data = {
+            'total':0,
+            'count':0
+            }
+        for a in indexes:
+            p1 = self.df.loc[int(a)].tolist()
+            for b in indexes:
+                p2 = self.df.loc[int(b)].tolist()
+                result = sqrt(((p1[0]-p2[0])**2)+((p1[1]-p2[1])**2))
+                data['total']+=result
+                data['count']+=1
+
+        avgDist = data['total']/data['count']
+        return avgDist
+
+    def __averageSpread(self):
+        for i in self.df.columns.tolist():
+            self.df = self.df[self.df[i] != 0.]
+        self.df.reset_index(drop=True,inplace=True)
+        indexes = self.df.index.tolist()
+        samp = sample(indexes,100)
+        self.df.iloc[samp]
+        return self.__spread()

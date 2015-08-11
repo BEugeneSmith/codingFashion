@@ -1,4 +1,4 @@
-# codingFashion
-The purpose of this project to see whether the difference in Men's and Women's clothing can be described statistically. The plan for now (5/31/2015) is to mine product information for clothing from Nordstrom and perform a PCA on both datasets to get an idea for the variance within each, then compare that between the two if possible. We do, however, expect men's clothing to be more 'boring'...way more boring.
+# Coding Fashion
+The purpose of this project to see whether the difference in Men's and Women's clothing can be described statistically. As it seems, they can! Feel free to poke around this repository to see my analysis, with the file called 'NordstromNotebook.ipynb' being the primary summary. Though this project's primary goal is complete feel free to suggest changes that may help in the long run. 
 
 Thanks!

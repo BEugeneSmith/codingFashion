@@ -1,10 +1,11 @@
-import nordstromDescStats as nds #see nordstromDescStats.py
-import nordstromMachineLearning as nml
+import nordstromDescStats as nds # see nordstromDescStats.py
+import nordstromMachineLearning as nml # see nordstromMachineLearning.py
 import pandas as pd
 
 from bokeh.charts import Bar, show, output_notebook
 from bokeh.plotting import figure, show, ColumnDataSource, Legend
-from bokeh.models import HoverTool
+from bokeh.models import HoverTool # this may not be necessary
+from bokeh.io import gridplot
 
 output_notebook()
 
@@ -29,25 +30,24 @@ class nordstromPlots():
         mdBar = Bar(
             {'men':self.menStats.summary.values(),'women':self.womenStats.summary.values()},
             cat=self.menStats.summary.keys(),
-            legend=True,title="Number of Terms in Each Category",
-            width=900,height=400,
-            xlabel='Term Groups',ylabel="Number of Terms Counted",
-            tools=None
+            legend=True,
+            width=400,height=400,
+            xlabel='Term Groups',ylabel="Terms Counted",
             )
-        show(mdBar)
+        return(mdBar)
 
     def nUniqueTermsCounted(self):
         mduBar = Bar(
             {'men':self.menStats.uniqueSummary.values(),'women':self.womenStats.uniqueSummary.values()},
             cat=self.menStats.uniqueSummary.keys(),
-            legend=True,title="Number of Unique Terms in Each Category",
-            width=900,height=400,
-            xlabel='Term Groups',ylabel="Number of Unique Terms",
-            tools=None
+            legend=True,
+            width=400,height=400,
+            xlabel='Term Groups',ylabel="Unique Terms",
             )
-        show(mduBar)
+        return(mduBar)
 
     def ratioPlot(self):
+        #Maybe we don't even need this plot
         ratioInit = nds.ratioAnalysis(self.menStats,self.womenStats)
         ratioData = ratioInit.ratioData
 
@@ -84,7 +84,7 @@ class nordstromPlots():
             {'men':self.menPlot.itemZip.values(),'women':self.womenPlot.itemZip.values()},
             cat=self.menPlot.itemZip.keys(),
             legend=True,title="Item Counts",
-            width=900,height=400,
+            width=400,height=400,
             xlabel='Items',ylabel="Count",
             tools=None
             )
@@ -94,51 +94,60 @@ class nordstromPlots():
         patternBar = Bar(
             {'men':self.menPlot.patternZip.values(),'women':self.womenPlot.patternZip.values()},
             cat=self.menPlot.patternZip.keys(),
-            legend=True,title="Pattern Counts",
-            width=900,height=400,
+            legend=True,title="Patterns",
+            width=450,height=450,
             xlabel='Patterns',ylabel="Count",
             tools=None
             )
-        show(patternBar)
+        return(patternBar)
 
     def fitBarPlot(self):
         fitBar = Bar(
             {'men':self.menPlot.fitZip.values(),'women':self.womenPlot.fitZip.values()},
             cat=self.menPlot.fitZip.keys(),
-            legend=True,title="Fit Counts",
-            width=900,height=400,
+            legend=True,title="Fits",
+            width=450,height=450,
             xlabel='Fits',ylabel="Count",
-            tools=None
+            #tools=None
             )
-        show(fitBar)
+        return(fitBar)
 
     def textureBarPlot(self):
         textureBar = Bar(
-                {'men':self.menPlot.textureZip.values(),'women':self.womenPlot.textureZip.values()},
-                cat=self.menPlot.textureZip.keys(),
-                legend=True,title="Textures Counts",
-                width=900,height=400,
-                xlabel='Textures',ylabel="Count",
-                tools=None
-                )
-        show(textureBar)
+            {'men':self.menPlot.textureZip.values(),'women':self.womenPlot.textureZip.values()},
+            cat=self.menPlot.textureZip.keys(),
+            legend=True,title="Textures",
+            width=450,height=450,
+            xlabel='Textures',ylabel="Count",
+            #tools=None
+            )
+        return(textureBar)
 
     def colorBarPlot(self):
-        colorBP = Bar({'men':self.mColorPrep.freqTable.values(),'women':self.wColorPrep.freqTable.values()},
-                    cat=self.mColorPrep.freqTable.keys(),legend=True,tools=None)
+        colorBP = Bar(
+            {'men':self.mColorPrep.freqTable.values(),'women':self.wColorPrep.freqTable.values()},
+            cat=self.mColorPrep.freqTable.keys(),
+            legend=True,title='Colors',
+            width=450,height=450,
+            xlabel='Colors',ylabel="Count",
+            )
 
-        show(colorBP)
+        return(colorBP)
 
 class pcaPlot(nml.pcaWrap):
     def __init__(self,df):
         self.pcDF = nml.preProcess(df)
         nml.pcaWrap.__init__(self,self.pcDF.redDup)
 
-    def plot(self):
+    def plot(self,title):
         cols = self.pcDF.columns.tolist()
         plot = figure(tools=[],
             x_axis_label = cols[0],
             y_axis_label = cols[1],
+            plot_width = 450,plot_height = 450,
             )
-        plot.scatter(self.norm_pcDF[cols[0]].tolist(),self.norm_pcDF[cols[1]].tolist())
-        show(plot)
+        plot.scatter(
+            self.norm_pcDF[cols[0]].tolist(),self.norm_pcDF[cols[1]].tolist(),
+            title=title
+            )
+        return(plot)
