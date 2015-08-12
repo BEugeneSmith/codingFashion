@@ -4,7 +4,7 @@ import pandas as pd
 
 from bokeh.charts import Bar, show, output_notebook
 from bokeh.plotting import figure, show, ColumnDataSource, Legend
-from bokeh.models import HoverTool # this may not be necessary
+from bokeh.models import HoverTool
 from bokeh.io import gridplot
 
 output_notebook()
@@ -47,7 +47,6 @@ class nordstromPlots():
         return(mduBar)
 
     def ratioPlot(self):
-        #Maybe we don't even need this plot
         ratioInit = nds.ratioAnalysis(self.menStats,self.womenStats)
         ratioData = ratioInit.ratioData
 
@@ -108,7 +107,6 @@ class nordstromPlots():
             legend=True,title="Fits",
             width=450,height=450,
             xlabel='Fits',ylabel="Count",
-            #tools=None
             )
         return(fitBar)
 
@@ -119,7 +117,6 @@ class nordstromPlots():
             legend=True,title="Textures",
             width=450,height=450,
             xlabel='Textures',ylabel="Count",
-            #tools=None
             )
         return(textureBar)
 

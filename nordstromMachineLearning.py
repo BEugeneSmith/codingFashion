@@ -17,6 +17,7 @@ class preProcess():
         self.redDup = self.duplicate.drop(['ItemName','VendorName','Color','Price'],axis=1)
 
 class datasetSplit():
+    # This may be useful later, not for PCA
     def __init__(self,df):
         self.df = df
         self.__dataSets()

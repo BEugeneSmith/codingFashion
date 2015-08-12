@@ -152,7 +152,6 @@ class descriptiveStats(Props):
         self.uniqueSummary = self.uniqueSummary()
 
     def __superSum(self,array):
-    #Temporary solution; this skips things that will muck up our totals
         total = 0
         for i in array:
             try:
@@ -675,7 +674,7 @@ class colorReduce:
         self.pdDF['binnedColor'] = self.reducedColors
 
 class ordinate(Props):
-    # def __init__(self,df,sex): #just in case we need it later 
+    # def __init__(self,df,sex): #just in case we need it later
     def __init__(self,df):
         self.terms = Props.__init__(self)
         self.df = df.pdDF
