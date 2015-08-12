@@ -31,7 +31,7 @@ class nordstromPlots():
             {'men':self.menStats.summary.values(),'women':self.womenStats.summary.values()},
             cat=self.menStats.summary.keys(),
             legend=True,
-            width=400,height=400,
+            width=450,height=450,
             xlabel='Term Groups',ylabel="Terms Counted",
             )
         return(mdBar)
@@ -41,7 +41,7 @@ class nordstromPlots():
             {'men':self.menStats.uniqueSummary.values(),'women':self.womenStats.uniqueSummary.values()},
             cat=self.menStats.uniqueSummary.keys(),
             legend=True,
-            width=400,height=400,
+            width=450,height=450,
             xlabel='Term Groups',ylabel="Unique Terms",
             )
         return(mduBar)
@@ -58,7 +58,7 @@ class nordstromPlots():
             ]
         )
 
-        ratioPlot = figure(plot_width=400, plot_height=400,tools=[hover])
+        ratioPlot = figure(plot_width=450, plot_height=450,tools=[hover])
         ratioSource = ColumnDataSource(
         data=dict(
             x=ratioData['x'],
