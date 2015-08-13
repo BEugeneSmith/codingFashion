@@ -82,7 +82,7 @@ class nordstromPlots():
         itemBar = Bar(
             {'men':self.menPlot.itemZip.values(),'women':self.womenPlot.itemZip.values()},
             cat=self.menPlot.itemZip.keys(),
-            legend=True,title="Item Counts",
+            legend=True,title="Item",
             width=900,height=450,
             xlabel='Items',ylabel="Count",
             tools=None
