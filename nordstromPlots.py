@@ -11,7 +11,7 @@ output_notebook()
 
 class nordstromPlots():
     def __init__(self):
-        #import data munging tools
+        ''' import data munging tools '''
         self.menCsv = pd.DataFrame.from_csv('nM.csv')
         self.womenCsv = pd.DataFrame.from_csv('nW.csv')
 
