@@ -8,6 +8,12 @@ class Props:
         self.fits = self.__fits()
         self.patterns = self.__patterns()
         self.textures = self.__textures()
+        self.colors = self.__colors()
+
+    def __colors(self):
+        return(
+            ['Red','Orange','Yellow','Green','Blue','Purple','Black','Grey','White','Brown']
+        )
 
     def __pieces(self):
     #list of all the pieces we may want to look for in either collection
